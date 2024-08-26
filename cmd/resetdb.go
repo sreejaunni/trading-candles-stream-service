@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
-	"github.com/jmoiron/sqlx"
-	"github.com/spf13/cobra"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/jmoiron/sqlx"
+	"github.com/spf13/cobra"
 )
 
 func resetDatabaseCMD(ctx context.Context, dbConn *sqlx.DB) *cobra.Command {

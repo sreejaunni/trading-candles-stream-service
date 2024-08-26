@@ -3,9 +3,10 @@ package datastore
 import (
 	"binance-candlestick-service/config"
 	"fmt"
+	"net/url"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"net/url"
 )
 
 var db *sqlx.DB

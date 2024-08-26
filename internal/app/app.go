@@ -8,34 +8,55 @@ import (
 	"binance-candlestick-service/internal/pkg/binance"
 	"binance-candlestick-service/proto"
 	"binance-candlestick-service/utils"
-	"github.com/jmoiron/sqlx"
 	"log"
 	"net"
+	"os"
 	"time"
+
+	"github.com/jmoiron/sqlx"
 
 	"google.golang.org/grpc"
 )
 
-func Run(cfg *config.Config, dbConn *sqlx.DB) error {
-	timeframe := time.Minute
+const TIMEFRAME = time.Minute
 
-	// Create a new OHLCRepo instance
+func Run(cfg *config.Config, dbConn *sqlx.DB) error {
+	logger := log.New(os.Stdout, "", 0)
+
 	ohlcRepo := db.NewOHLCRepo(dbConn)
 	ohlcCompleteChan := make(chan ohlc.OHLC)
 
 	srv := grpcServer.NewServer()
 
+	symbols := cfg.Symbols
+
+	// Counter for the number of OHLC bars processed
+	barCounter := 0
+	barsPerLog := len(symbols)
+
 	go func() {
 		for ohlc := range ohlcCompleteChan {
+
 			utils.PrintOHLC(ohlc)
+
 			srv.BroadcastOHLC(ohlc)
 			if err := ohlcRepo.SaveOHLC(ohlc); err != nil {
 				log.Printf("Failed to save OHLC data: %v", err)
 			}
+
+			// Log the number of OHLC bars processed
+			barCounter++
+			if barCounter >= barsPerLog {
+
+				logger.Printf("#### Processed %d OHLC Bars ####", barCounter)
+				logger.Printf("#### Preparing for the Next Batch... ####")
+				logger.Printf("==============================================================")
+
+				barCounter = 0
+			}
 		}
 	}()
 
-	symbols := cfg.Symbols
 	for _, symbol := range symbols {
 		tickChan := make(chan binance.TradeData)
 		client, err := binance.NewBinanceClient(symbol)
@@ -45,7 +66,7 @@ func Run(cfg *config.Config, dbConn *sqlx.DB) error {
 
 		go client.StartTickStreaming(tickChan)
 
-		aggregator := ohlc.NewAggregator(symbol, timeframe, tickChan, ohlcCompleteChan)
+		aggregator := ohlc.NewAggregator(symbol, TIMEFRAME, tickChan, ohlcCompleteChan)
 		go aggregator.Start()
 	}
 

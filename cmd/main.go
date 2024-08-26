@@ -4,16 +4,20 @@ import (
 	"binance-candlestick-service/config"
 	db "binance-candlestick-service/internal/datastore"
 	"context"
-	"github.com/spf13/cobra"
 	"log"
 	"time"
+
+	"github.com/spf13/cobra"
 )
 
 func main() {
 
 	ctx := context.Background()
 
-	cfg := config.NewConfig()
+	cfg, err := config.NewConfig()
+	if err != nil {
+		log.Fatalf("Failed to load config: %v", err)
+	}
 
 	dbConn, err := db.InitDatabase(cfg.DB)
 	if err != nil {

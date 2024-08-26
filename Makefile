@@ -1,7 +1,7 @@
 
 build:
 	@echo "Building Docker image..."
-	docker build --platform linux/amd64 -t marketplace-app .
+	docker build --platform linux/amd64 --no-cache -t marketplace-app .
 start:
 	@echo "Streaming Candle sticks.."
 	go run cmd/*.go server

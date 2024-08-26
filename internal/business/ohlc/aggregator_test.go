@@ -96,12 +96,10 @@ func TestAggregator_GracefulShutdown(t *testing.T) {
 
 	go aggregator.Start()
 
-	// Send a tick and then close the channel to simulate a shutdown
 	tickChan <- binance.TradeData{Price: "50000", Quantity: "1"}
 	close(tickChan)
-	time.Sleep(time.Second) // Allow time for processing
+	time.Sleep(time.Second)
 
-	// Close OHLC channel and check if shutdown is graceful
 	close(ohlcCompleteChan)
 	_, ok := <-ohlcCompleteChan
 	if ok {

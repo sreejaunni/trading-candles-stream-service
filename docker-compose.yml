@@ -8,6 +8,6 @@ services:
     environment:
       POSTGRES_DB: market_db
       POSTGRES_USER: app_user
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: P@ssword#123
 
 

@@ -8,7 +8,6 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-// OHLCRepo is a concrete implementation of the OHLCRepository interface
 type OHLCRepo struct {
 	db DatabaseExecutor
 }
@@ -18,12 +17,10 @@ type DatabaseExecutor interface {
 	Queryx(query string, args ...interface{}) (*sqlx.Rows, error)
 }
 
-// NewOHLCRepo creates a new OHLCRepo instance
 func NewOHLCRepo(db DatabaseExecutor) *OHLCRepo {
 	return &OHLCRepo{db: db}
 }
 
-// SaveOHLC saves OHLC data to the database
 func (repo *OHLCRepo) SaveOHLC(ohlc ohlc.OHLC) error {
 	query := `
         INSERT INTO candlesticks (

@@ -2,9 +2,10 @@ package binance
 
 import (
 	"encoding/json"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/url"
+
+	"github.com/gorilla/websocket"
 )
 
 type BinanceClient struct {
