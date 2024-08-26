@@ -15,7 +15,7 @@ The Candles Stream Service is a gRPC-based microservice that connects to the Bin
 To get started with the Candles Stream Service, follow these steps:
 
 
-## **Running the Application in Development Environment**
+## 🚀 **Running the Application in Development Environment**
 
 ### Setup
 
@@ -41,7 +41,7 @@ To get started with the Candles Stream Service, follow these steps:
    make start
    ```
 
-## **Running the Application in Containerized Environment**
+## 🚀 **Running the Application in Containerized Environment**
 
 
 ### Setup
