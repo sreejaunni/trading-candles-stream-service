@@ -6,7 +6,7 @@ start:
 	@echo "Streaming Candle sticks.."
 	go run cmd/*.go server
 
-reset:
+reset-db:
 	@echo "Resetting db..."
 	go run cmd/*.go reset-database
 
