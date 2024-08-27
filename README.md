@@ -1,5 +1,5 @@
 
-# Candles Stream Service
+# Trading Candles Stream Service
 
 ## Overview
 The Candles Stream Service is a gRPC-based microservice that connects to the Binance API to fetch real-time trade data for cryptocurrency pairs such as BTCUSDT, ETHUSDT, and PEPEUSDT. The service aggregates the trade data into OHLC (Open, High, Low, Close) candlesticks with a 1-minute timeframe and stores them in a PostgreSQL database. It also provides a gRPC API for broadcasting these candlestick bars.
