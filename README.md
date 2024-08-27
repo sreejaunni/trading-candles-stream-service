@@ -28,7 +28,7 @@ To get started with the Candles Stream Service, follow these steps:
 2. Start docker compose
 
    ```bash
-    docker-compose up
+    docker compose up -d
     ```
    
 3. Database Reset - (Database Initialization)
@@ -59,18 +59,18 @@ To get started with the Candles Stream Service, follow these steps:
 3. Start docker compose
 
    ```bash
-    docker-compose up
+    docker compose up -d
     ```
 
 3. Database Reset -(Database Initialization)
 
    ```bash
-   docker run --name marketplace-migration-container -e DB_HOST=host.docker.internal marketplace-app ./app reset-database
+   make run-migrate
    ```
 4. Run application
 
    ```bash
-   docker run --name marketplace-application-container -e DB_HOST=host.docker.internal marketplace-app ./app server
+   make run-server
    ```
 
 
