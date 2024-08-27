@@ -23,7 +23,7 @@ To get started with the Candles Stream Service, follow these steps:
 
    ```bash
    git clone https://github.com/sreejaunni/trading-candles-stream-service.git
-   cd candles-stream-service
+   cd trading-candles-stream-service
    
 2. Start docker compose
 
@@ -50,7 +50,7 @@ To get started with the Candles Stream Service, follow these steps:
 
    ```bash
    git clone https://github.com/sreejaunni/trading-candles-stream-service.git
-   cd candles-stream-service
+   cd trading-candles-stream-service
 
 2. make build  (build image)
    ```bash
