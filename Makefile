@@ -29,6 +29,10 @@ run-migrate:
     	fi
 	docker run --name $(MIGRATION_CONTAINER_NAME) -e DB_HOST=host.docker.internal marketplace-app ./app reset-database
 
+start-client:
+	@echo "Starting client..."
+	go run cmd/*.go start-client
+
 
 
 
